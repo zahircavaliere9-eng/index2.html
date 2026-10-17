@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi novia?</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c20, #15102a);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 25px;
+            border-radius: 28px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Animación del Corazón por Código */
+        .decoracion-icono {
+            position: relative;
+            width: 100px;
+            height: 90px;
+            margin: 0 auto 30px auto;
+            animation: latido 1.2s infinite ease-in-out;
+        }
+
+        .decoracion-icono::before,
+        .decoracion-icono::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 50px;
+            height: 80px;
+            border-radius: 50px 50px 0 0;
+            background: linear-gradient(to bottom, #ff3366, #ff5e62);
+        }
+
+        .decoracion-icono::before {
+            left: 50px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .decoracion-icono::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes latido {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 26px;
+            margin-bottom: 35px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .btn-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: 140px;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        #btn-si {
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            color: #0f0c20;
+            padding: 15px 35px;
+            font-size: 18px;
+        }
+
+        #btn-no {
+            background: linear-gradient(45deg, #ff5e62, #ff9966);
+            color: white;
+            padding: 14px 28px;
+            font-size: 15px;
+        }
+
+        #btn-si:active {
+            transform: scale(0.95);
+        }
+
+        /* Estilos de la Pantalla Final */
+        .texto-principal {
+            font-size: 36px;
+            background: linear-gradient(45deg, #ff3366, #ff9966);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 18px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            animation: aparecer 0.5s ease-out;
+        }
+
+        .texto-secundario {
+            font-size: 20px;
+            color: #e2e8f0;
+            font-weight: 500;
+            line-height: 1.4;
+            animation: aparecer 0.8s ease-out;
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="tarjeta-propuesta">
+        <div class="decoracion-icono" id="icono-grafico"></div>
+        
+        <h1 id="titulo">¿Quieres ser mi novia?</h1>
+        
+        <div class="btn-wrapper" id="contenedor-botones">
+            <button id="btn-si">¡SÍ!</button>
+            <button id="btn-no">No</button>
+        </div>
+    </div>
+
+    <script>
+        const btnNo = document.getElementById('btn-no');
+        const btnSi = document.getElementById('btn-si');
+        const icono = document.getElementById('icono-grafico');
+        const titulo = document.getElementById('titulo');
+        const contenedorBotones = document.getElementById('contenedor-botones');
+
+        let paddingX = 35;
+        let paddingY = 15;
+        let fontSize = 18;
+        let clicksEnNo = 0;
+
+        btnNo.addEventListener('click', () => {
+            clicksEnNo++;
+            
+            paddingX += 16;
+            paddingY += 8;
+            fontSize += 6;
+
+            btnSi.style.padding = `${paddingY}px ${paddingX}px`;
+            btnSi.style.fontSize = `${fontSize}px`;
+
+            if (clicksEnNo >= 6) {
+                btnNo.style.display = 'none';
+            }
+        });
+
+        btnSi.addEventListener('click', () => {
+            // Ocultar por completo los botones y el corazón de la pantalla
+            contenedorBotones.style.display = 'none';
+            icono.style.display = 'none';
+
+            // Mostrar tus textos exactos
+            titulo.innerHTML = `
+                <div class="texto-principal">Era broma :3</div>
+                <div class="texto-secundario">aunq aun asi te kiero pero chill</div>
+            `;
+        });
+    </script>
+</body>
+</html>
